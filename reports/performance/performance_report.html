@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte de Rendimiento</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    canvas { max-width: 900px; margin: 20px auto; display: block; }
+  </style>
+</head>
+<body>
+  <h1>📊 Reporte de Rendimiento Lighthouse</h1>
+  <p>URL Analizada: <b>N/A</b></p>
+  <canvas id="scoreChart"></canvas>
+  <canvas id="perfMetrics"></canvas>
+
+  <script>
+    const labels = ["22/7/2025, 16:50:01","22/7/2025, 17:20:11","22/7/2025, 17:20:12","22/7/2025, 17:20:21","22/7/2025, 17:20:38","22/7/2025, 17:20:47"];
+    const scoreData = [0,0,0,0,0,0];
+    const fcp = [0,0,0,0,0,0];
+    const lcp = [0,0,0,0,0,0];
+    const tti = [0,0,0,0,0,0];
+    const tbt = [0,0,0,0,0,0];
+    const cls = [0,0,0,0,0,0];
+
+    new Chart(document.getElementById('scoreChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Performance Score',
+          data: scoreData,
+          borderColor: 'green',
+          backgroundColor: 'rgba(0,128,0,0.2)',
+          fill: true
+        }]
+      },
+      options: {
+        scales: { y: { beginAtZero: true, max: 100 } }
+      }
+    });
+
+    new Chart(document.getElementById('perfMetrics'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'FCP (ms)', data: fcp, backgroundColor: 'blue' },
+          { label: 'LCP (ms)', data: lcp, backgroundColor: 'orange' },
+          { label: 'TTI (ms)', data: tti, backgroundColor: 'purple' },
+          { label: 'TBT (ms)', data: tbt, backgroundColor: 'red' },
+          { label: 'CLS', data: cls, backgroundColor: 'gray' }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

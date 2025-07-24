@@ -1,0 +1,105 @@
+# 🧪 QA Playwright + IA Framework
+
+Framework de **automatización de pruebas E2E** con [Playwright](https://playwright.dev/) y soporte de **IA** (Ollama + Mistral) para la generación automática de casos de prueba.  
+Incluye **pruebas funcionales y no funcionales** (Accesibilidad, Seguridad y Rendimiento) y está diseñado para ser **escalable y profesional**.
+
+---
+
+## ✨ **Características**
+
+✅ **Pruebas Funcionales** (Web y Mobile Web con Playwright).  
+✅ **Pruebas No Funcionales**:
+   - **Accesibilidad** con Axe-core (WCAG A/AA).
+   - **Seguridad**: validación de cabeceras, XSS básico y bloqueo por intentos fallidos.
+   - **Rendimiento**: métricas Lighthouse (FCP, LCP, TTI, TBT, CLS, Performance Score).  
+✅ **IA (Ollama + Mistral)**:
+   - Generación de **casos de prueba manuales** a partir de historias de usuario.
+✅ **Estructura modular y escalable** → fácil de extender a visual testing, contract testing, etc.
+
+---
+
+## 📂 **Estructura del Proyecto**
+qa-playwright-ia/
+│
+├── playwright.config.ts # Configuración global de Playwright
+├── package.json
+├── README.md
+│
+├── tests/ # Carpeta principal de tests
+│ ├── functional/ # Tests funcionales E2E
+│ ├── accessibility/ # Tests de accesibilidad (Axe-core)
+│ │ └── home_accessibility_advanced.spec.ts
+│ ├── security/ # Tests de seguridad
+│ │ └── security_advanced.spec.ts
+│ ├── performance/ # Tests de rendimiento con Lighthouse
+│ │ └── performance_advanced.spec.ts
+│ └── generated/ # Tests generados automáticamente con IA (futuro)
+│
+├── utils/ # Utilidades compartidas
+│ └── performanceUtils.ts # Helper para métricas Lighthouse
+│
+├── reports/ # Reportes generados (JSONs)
+│ └── performance/ # Reportes de rendimiento Lighthouse
+│
+└── ia/ # Scripts de Inteligencia Artificial
+└── generate_test_cases_from_story.py
+
+---
+
+## 🚀 **Instalación y Configuración**
+
+1. **Clonar el repositorio:**
+
+cd qa-playwright-ia
+cd playwright
+
+2. Instalar dependencias
+npm install
+
+3. Instalar Playwright y navegadores:
+npx playwright install
+
+4. Instalar dependencias de rendimiento
+npm install lighthouse chrome-launcher
+
+5. (Opcional) Configurar IA (Ollama + Mistral)
+Instala Ollama : https://ollama.com/
+
+Descarga el modelo mistral:
+ollama pull mistral
+
+▶️ Ejecución de Tests
+
+1. Ejecutar todos los tests
+npx playwright test
+
+2. Ejecutar por tipo
+Funcionales:
+npx playwright test tests/functional
+
+Accesibilidad:
+npx playwright test tests/accessibility
+
+Seguridad:
+npx playwright test tests/security
+
+Rendimiento:
+npx playwright test tests/performance
+
+📊 Rendimiento Avanzado
+El test de rendimiento (performance_advanced.spec.ts) genera métricas detalladas y guarda un reporte completo de Lighthouse en JSON.
+npx playwright test tests/performance/performance_advanced.spec.ts
+
+Los JSON se guardan en: reports/performance/lighthouse-<timestamp>.json
+
+🧠 IA - Generación de Casos de Prueba Manuales
+Puedes generar automáticamente casos de prueba a partir de una historia de usuario:
+
+1. Ve a la carpeta ia/:
+cd ia
+
+2. Ejecuta el Scripts
+python generate_test_cases_from_story.py
+
+3. Introduce la historia de usuario cuando te lo pida.
+Se generará un CSV en la raíz con los casos en formato compatible con Xray.
